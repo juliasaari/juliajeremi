@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emma & Liam - Wedding Invitation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- Basic CSS -->
+  <style>
+    :root {
+      --primary: #b5838d;
+      --secondary: #e5989b;
+      --background: #fff0f3;
+      --text: #333;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('https://images.unsplash.com/photo-1529634890565-f836f6df72b1?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color: white;
+      padding: 10rem 1rem;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+    }
+
+    nav {
+      background: var(--primary);
+      padding: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    input, select, button {
+      padding: 0.7rem;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: var(--secondary);
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--primary);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    img.gallery {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin: 0.5rem;
+    }
+
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Emma & Liam</h1>
+    <p>We're getting married!</p>
+    <p>June 21, 2025 • Lakeview Gardens</p>
+  </header>
+
+  <nav>
+    <a href="#story">Our Story</a>
+    <a href="#details">Details</a>
+    <a href="#rsvp">RSVP</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+
+  <section id="story">
+    <h2>Our Story</h2>
+    <p>It all began with a chance encounter at a coffee shop, and soon turned into endless conversations and adventures together. After five beautiful years, we’re so excited to celebrate our n[...]</p>
+  </section>
+
+  <section id="details">
+    <h2>The Wedding Details</h2>
+    <p><strong>Date:</strong> Saturday, June 21, 2025</p>
+    <p><strong>Venue:</strong> Lakeview Gardens, Greenfield</p>
+    <p><strong>Dress Code:</strong> Garden Formal</p>
+
+    <div class="countdown" id="countdown"></div>
+  </section>
+
+  <section id="rsvp">
+    <h2>RSVP</h2>
+    <p>Please let us know by May 15, 2025</p>
+
+    <!-- RSVP Form (works with Netlify Forms) -->
+    <form name="rsvp" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="rsvp">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <select name="attending" required>
+        <option value="">Will you attend?</option>
+        <option value="Yes">Yes, I’ll be there!</option>
+        <option value="No">Sorry, can’t make it.</option>
+      </select>
+      <input type="text" name="guests" placeholder="Number of Guests">
+      <button type="submit">Submit RSVP</button>
+    </form>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+      <img class="gallery" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=60" alt="Couple">
+      <img class="gallery" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=60" alt="Rings">
+      <img class="gallery" src="https://images.unsplash.com/photo-1508973372-bb6b63ed0016?auto=format&fit=crop&w=600&q=60" alt="Venue">
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Emma & Liam | Built with ❤️</p>
+  </footer>
+
+  <!-- Countdown Timer Script -->
+  <script>
+    const weddingDate = new Date("June 21, 2025 15:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownEl.innerHTML = "Today’s the big day! 💍";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m until the wedding 💕`;
+    }, 1000);
+  </script>
+</body>
+</html>
